@@ -350,9 +350,12 @@ body.popup .submit-row {
 .inline-group .aligned label {
     width: 160px;
 }
-
+/*vertical scrollbar*/
 .inline-related {
     position: relative;
+    width:800px;
+    overflow-y: auto;
+    height: 300px;
 }
 
 .inline-related h3 {
@@ -403,8 +406,9 @@ body.popup .submit-row {
     border: none;
 }
 
+
 .inline-group .tabular tr.has_original td {
-    padding-top: 2em;
+    padding-top: 0em;
 }
 
 .inline-group .tabular tr td.original {

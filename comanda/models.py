@@ -1,10 +1,9 @@
 #_*_ coding: utf-8 _*_
 
-from django.db import models
 from business_unit.models import BusinessUnitSpecificModel
 from cliente.models import Cliente
 from produto.models import Produto
-
+from django.db import models
 # Create your models here.
 
 
@@ -38,7 +37,7 @@ class Comanda(BusinessUnitSpecificModel):
 
     numero = models.CharField('Numero', max_length=5, default ='00000')
     cliente = models.ForeignKey(Cliente, null=True)
-    status = models.IntegerField('Status', choices=STATUS, default = ABERTO)
+    status = models.IntegerField('Status da Comanda', choices=STATUS, default = ABERTO)
     metodo_pagto = models.IntegerField('Metodo de Pagamento', choices=FORMA_PAGTO, default= DINHEIRO)
 
     def __unicode__(self):
@@ -60,8 +59,8 @@ class Item(models.Model):
     comanda = models.ForeignKey(Comanda, default=1)
     produto = models.ForeignKey(Produto, default=1)
     quantidade = models.DecimalField('Quantidade', max_digits= 6, decimal_places = 3,default = 0)
-    preco_unit = models.DecimalField('Preço Unitário', max_digits= 6, decimal_places = 2, null=True, blank=True)
-    total_item = models.DecimalField('Total', max_digits= 6, decimal_places = 2, null=True, blank= True)
+    preco_unit = models.DecimalField('Preço Unitário (R$)', max_digits= 6, decimal_places = 2,default = 0)
+    total_item = models.DecimalField('Total (R$)', max_digits= 6, decimal_places = 2,default = 0)
 
     def __unicode__(self):
         return self.produto.descricao or u''

@@ -3,7 +3,9 @@ from django.contrib import admin
 from comanda.models import Comanda,Item
 from restaurante.admin import InventFormAdmin, InventModelAdmin
 from django.forms.models import ModelForm
-
+from django.db import models
+from django.forms import TextInput, Textarea
+from django.contrib import messages
 
 class ComandaAdminForm(InventFormAdmin):
 
@@ -29,6 +31,7 @@ class AlwaysChangedModelForm(ModelForm):
         By always returning true even unchanged inlines will get validated and saved."""
         return True
 
+
 class ComandaInline(admin.TabularInline):
     extra = 0
     model = Item
@@ -39,14 +42,23 @@ class ComandaAdmin(InventModelAdmin):
     form = ComandaAdminForm
     #list_filter = (StatusListFilter,EventoTipoListFilter)
     fieldsets = (
-        ('Comandas', {
-            'fields':(('business_unit'),('numero','cliente'),('status','metodo_pagto')),
+        ('COMANDA', {
+            'fields':(('business_unit'),('cliente','status','metodo_pagto')),
         }),
     )
 
     inlines = [ComandaInline]
 
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'20'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':100})},
+    }
 
+    def save_model(self, request, obj, form, change):
+        """for getting rid of messages"""
+        messages.set_level(request, messages.ERROR)
+        obj.user = request.user
+        obj.save()
 
 # Register your models here.
 admin.site.register(Comanda, ComandaAdmin)

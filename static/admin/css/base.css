@@ -57,8 +57,8 @@ h1,h2,h3,h4,h5 {
 }
 
 h1 {
-    margin: 0 0 20px;
-    font-weight: 300;
+    margin: 0 0 0px;
+    font-weight: 100;
     font-size: 20px;
     color: #666;
 }
@@ -240,7 +240,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
 table {
     border-collapse: collapse;
     border-color: #ccc;
-}
+}bottom
 
 td, th {
     font-size: 13px;
@@ -759,7 +759,7 @@ table#change-history tbody th {
 }
 
 #content {
-    padding: 20px 40px;
+    padding: 10px 10px;
 }
 
 .dashboard #content {
@@ -811,10 +811,10 @@ table#change-history tbody th {
 
 #header {
     width: auto;
-    height: 40px;
-    padding: 10px 40px;
+    height: 1px;
+    padding: 20px 40px;
     background: #417690;
-    line-height: 40px;
+    line-height: 12px;
     color: #ffc;
     overflow: hidden;
 }
